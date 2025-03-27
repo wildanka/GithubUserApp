@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.hcsgithubuser.base.data.UiState
 import com.example.hcsgithubuser.base.presentation.BaseFragment
 import com.example.hcsgithubuser.databinding.FragmentHomeBinding
@@ -32,7 +34,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         val adapter = GithubUserListAdapter()
         binding.rvUserList.adapter = adapter
 
-        viewModel.userList
         viewModel.triggerSomething()
         lifecycleScope.launch {
             // repeatOnLifecycle launches the block in a new coroutine every time the
@@ -46,11 +47,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                     when (uiState) {
                         is UiState.Success -> {
                             adapter.refreshList(uiState.data)
+                            stopLoadingIndicator()
                         }
                         is UiState.Error -> {
                             //TODO : handle error UI here
+                            stopLoadingIndicator()
                         }
                         UiState.Loading -> {
+                            if(viewModel.page == 1){
+                                binding.srlUserList.isRefreshing = true
+                            }
                             //TODO : handle Loading UI here
                         }
                     }
@@ -58,5 +64,30 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
         }
 
+        binding.srlUserList.setOnRefreshListener {
+            viewModel.refreshList()
+        }
+
+        binding.rvUserList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (!viewModel.isLoading) {
+                    val lastVisible =
+                        (recyclerView.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
+                    val currentListSize = (viewModel.userList.value as? UiState.Success)?.data?.size ?: 0
+
+                    if (lastVisible >= currentListSize - 2) {
+                        // Trigger the next page API call
+                        viewModel.triggerSomething()
+                    }
+                }
+            }
+        })
+    }
+
+    private fun stopLoadingIndicator(){
+        if(binding.srlUserList.isRefreshing){
+            binding.srlUserList.isRefreshing = false
+        }
     }
 }

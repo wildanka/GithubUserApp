@@ -61,11 +61,11 @@ dependencies {
     implementation(libs.okhttp)
     ksp(libs.moshi.kotlin.codegen)
     implementation(libs.okhttp3.logging.interceptor)
+    implementation(libs.androidx.swiperefreshlayout)
 
     //chucker
     debugImplementation(libs.chucker.library)
     releaseImplementation(libs.chucker.library.no.op)
-
     // Koin for Android
     implementation(libs.bundles.koin)
     // Koin Annotations KSP Compiler

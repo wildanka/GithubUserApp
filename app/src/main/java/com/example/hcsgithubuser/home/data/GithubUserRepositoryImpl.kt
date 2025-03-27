@@ -5,8 +5,8 @@ import com.example.hcsgithubuser.home.data.remote.GithubService
 import com.example.hcsgithubuser.home.data.remote.response.GithubUserDto
 
 class GithubUserRepositoryImpl(private val githubServiceApi: GithubService) : GithubUserRepository {
-    override suspend fun getUsers(page: Int): ApiResponse<List<GithubUserDto>> {
-        val response = githubServiceApi.getUsersAt(page, null)
+    override suspend fun getUsers(page: Int, lastId: Int?): ApiResponse<List<GithubUserDto>> {
+        val response = githubServiceApi.getUsersAt(page, lastId)
 
 
         if (response.isSuccessful) {

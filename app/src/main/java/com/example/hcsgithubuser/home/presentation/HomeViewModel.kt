@@ -19,27 +19,49 @@ class HomeViewModel(private val githubUserUseCase: GithubUserUseCase) : BaseView
     val userList: StateFlow<UiState<List<GithubUserDto>>> get() = _userList
 
     private var coroutineJob: Job? = null
+    var page = 0
+    var lastId : Int? = null
+    var isLoading = false
 
     override fun initialisation(savedInstanceState: Bundle?) {
         //TODO : leave for initialisation scope
     }
 
+    fun refreshList(){
+        page = 0
+        lastId = null
+        coroutineJob?.cancel()
+        _userList.value = UiState.Loading
+        triggerSomething()
+    }
+
+
     fun triggerSomething() {
         coroutineJob = viewModelScope.launch {
-            when (val result = githubUserUseCase.fetchUserList(0)) {
+            if(isLoading){
+                return@launch
+            }
+            isLoading = true
+            page++
+            when (val result = githubUserUseCase.fetchUserList(page, lastId)) {
                 is ApiResponse.Success -> {
-                    _userList.value = UiState.Success(data = result.data)
+                    val currentList = (userList.value as? UiState.Success)?.data ?: emptyList()
+                    val newList = currentList + result.data // Append new data
+
+                    _userList.value = UiState.Success(data = newList)
+
+                    lastId = result.data.lastOrNull()?.id
+                    isLoading = false
                 }
-                ApiResponse.Empty -> {
+                is ApiResponse.Empty -> {
                     _userList.value = UiState.Loading
+                    isLoading = false
                 }
                 is ApiResponse.Error -> {
                     _userList.value = UiState.Error(errorMessage = result.errorMessage)
-                    Log.d("WLDN", "VM api call error: ")
+                    isLoading = false
                 }
             }
         }
-
-
     }
 }
