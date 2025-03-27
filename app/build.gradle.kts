@@ -41,6 +41,7 @@ android {
         jvmTarget = "11"
     }
     buildFeatures {
+        viewBinding = true
         buildConfig = true
     }
 }
@@ -52,7 +53,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-
+    implementation(libs.glide)
     implementation(libs.retrofit)
     implementation(libs.converter.moshi)
     implementation(libs.moshi)
