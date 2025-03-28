@@ -3,6 +3,9 @@
     <style name="Base.Theme.HcsGithubUser" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+
     </style>
 
     <style name="Theme.HcsGithubUser" parent="Base.Theme.HcsGithubUser" />

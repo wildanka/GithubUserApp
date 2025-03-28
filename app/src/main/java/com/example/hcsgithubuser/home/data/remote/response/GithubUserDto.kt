@@ -58,5 +58,7 @@ data class GithubUserDto(
     val nodeId: String? = null,
 
     @Json(name="organizations_url")
-    val organizationsUrl: String? = null
+    val organizationsUrl: String? = null,
+
+    var pageIndex: Int = -1
 )

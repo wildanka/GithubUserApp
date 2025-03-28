@@ -23,6 +23,7 @@ pagingVersion = "3.3.6"
 kotlinSerialization = "2.0.0"
 serialization = "1.7.0-RC"
 swiperefreshlayout = "1.1.0"
+pagingRuntimeKtx = "3.3.6"
 
 
 [libraries]
@@ -55,6 +56,7 @@ room-paging3 = { group = "androidx.room", name = "room-paging", version.ref = "r
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "serialization" }
 serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
+androidx-paging-runtime-ktx = { group = "androidx.paging", name = "paging-runtime-ktx", version.ref = "pagingRuntimeKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

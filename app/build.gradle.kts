@@ -59,6 +59,7 @@ dependencies {
     implementation(libs.moshi)
     implementation(libs.moshi.kotlin)
     implementation(libs.okhttp)
+    implementation(libs.androidx.paging.runtime.ktx)
     ksp(libs.moshi.kotlin.codegen)
     implementation(libs.okhttp3.logging.interceptor)
     implementation(libs.androidx.swiperefreshlayout)

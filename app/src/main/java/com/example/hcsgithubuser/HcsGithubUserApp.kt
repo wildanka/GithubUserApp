@@ -8,8 +8,14 @@ import org.koin.core.context.startKoin
 
 
 class HcsGithubUserApp : Application() {
+    companion object {
+        @JvmField
+        var instance: HcsGithubUserApp? = null
+    }
+
     override fun onCreate() {
         super.onCreate()
+        instance = this
 
         startKoin {
             androidLogger()
