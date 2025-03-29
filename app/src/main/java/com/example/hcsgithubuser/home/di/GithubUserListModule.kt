@@ -70,7 +70,9 @@ val githubUserModule = module {
             androidApplication(),
             GithubUserDatabase::class.java,
             "myGithubDb"
-        ).build()
+        )
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
     single { get<GithubUserDatabase>().githubUserDao }

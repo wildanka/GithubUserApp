@@ -5,8 +5,10 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import androidx.room.Upsert
 import com.example.hcsgithubuser.home.data.local.entity.GithubUserEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface GithubUserDao {
@@ -22,6 +24,10 @@ interface GithubUserDao {
 
     @Query("DELETE FROM githubUser")
     suspend fun clearTable()
+
+    @Query("SELECT * FROM githubUser WHERE id = :userId")
+    fun getOne(userId: Int): Flow<GithubUserEntity?>
+
 //    @Query("SELECT * FROM githubUser WHERE pageIndex >= 0 ORDER BY pageIndex")
 //    fun getAllWithIndex(): Flow<List<GithubUserEntity>>
 }

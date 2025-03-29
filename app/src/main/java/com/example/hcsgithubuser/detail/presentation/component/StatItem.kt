@@ -11,9 +11,9 @@ import androidx.compose.ui.unit.sp
 import com.example.hcsgithubuser.common.presentation.ui.theme.HcsGithubUserTheme
 
 @Composable
-fun StatItem(title: String, count: String) {
+fun StatItem(title: String, count: Int) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(text = count, fontWeight = FontWeight.Bold, fontSize = 18.sp, color = Color.Black)
+        Text(text = count.toString(), fontWeight = FontWeight.Bold, fontSize = 18.sp, color = Color.Black)
         Text(text = title, fontSize = 14.sp, color = Color.Gray)
     }
 }
@@ -22,6 +22,6 @@ fun StatItem(title: String, count: String) {
 @Composable
 private fun StatItemPreview() {
     HcsGithubUserTheme {
-        StatItem("Following", "5")
+        StatItem("Following", 5)
     }
 }

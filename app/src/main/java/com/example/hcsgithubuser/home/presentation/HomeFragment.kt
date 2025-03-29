@@ -43,14 +43,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         lifecycleScope.launch {
             viewModel.items.collectLatest { it ->
-                Log.d("WLDN HF", "initView: viewModel.items.collectLatest PAGE = ${viewModel.page}")
                 adapter.submitData(it)
-
-                Log.d("WLDN HF", "PAGE = ${viewModel.page}")
-//                if(viewModel.page == 0){
-//                    Log.d("WLDN HF", "trigger viewModel.loadUserDataRemotely")
-//                    viewModel.loadUserDataRemotely()
-//                }
             }
         }
 
@@ -78,7 +71,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                     val lastVisible =
                         (recyclerView.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
                     val currentListSize = adapter.itemCount
-                    Log.d("WLDN HF", "RV lastVisible = $lastVisible | currentListSize = $currentListSize | adapter.itemCount = ${adapter.itemCount}")
 
                     if (lastVisible >= currentListSize - 1 && !viewModel.isLoading.value) {
                         // Trigger the next page API call
