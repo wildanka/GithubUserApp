@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">HcsGithubUser</string>
+    <string name="search">Search</string>
+    <string name="search_user">Search User</string>
+    <string name="type_username">Type username</string>
+    <string name="user_avatar">user avatar</string>
+
 </resources>

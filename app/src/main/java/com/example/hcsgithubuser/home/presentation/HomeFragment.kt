@@ -1,22 +1,19 @@
 package com.example.hcsgithubuser.home.presentation
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.hcsgithubuser.base.data.UiState
 import com.example.hcsgithubuser.base.presentation.BaseFragment
 import com.example.hcsgithubuser.databinding.FragmentHomeBinding
 import com.example.hcsgithubuser.home.presentation.adapter.GithubUserPagingAdapter
+import com.example.hcsgithubuser.search.presentation.SearchFragment
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -57,44 +54,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
         }
 
-//        viewModel.triggerSomething()
-
-
-        /*lifecycleScope.launch {
-            // repeatOnLifecycle launches the block in a new coroutine every time the
-            // lifecycle is in the STARTED state (or above) and cancels it when it's STOPPED.
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                // Trigger the flow and start listening for values.
-                // Note that this happens when lifecycle is STARTED and stops
-                // collecting when the lifecycle is STOPPED
-                viewModel.userList.collect { uiState ->
-                    // New value received
-                    when (uiState) {
-                        is UiState.Success -> {
-//                            adapter.refreshList(uiState.data)
-
-                            lifecycleScope.launch {
-                                viewModel.items.collectLatest {
-                                    Log.d("WLDN HF", "initView: viewModel.items.collectLatest")
-//                                    adapter.submitData(it)
-                                }
-                            }
-                            stopLoadingIndicator()
-                        }
-                        is UiState.Error -> {
-                            //TODO : handle error UI here
-                            stopLoadingIndicator()
-                        }
-                        UiState.Loading -> {
-                            if(viewModel.page == 1){
-                                binding.srlUserList.isRefreshing = true
-                            }
-                            //TODO : handle Loading UI here
-                        }
-                    }
-                }
-            }
-        }*/
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -136,35 +95,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
 
         binding.cvSearch.setOnClickListener {
-            binding.etSearch.requestFocus()
-            val imm =
-                requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.showSoftInput(binding.etSearch, InputMethodManager.SHOW_IMPLICIT)
+            val dialog = SearchFragment()
+            dialog.show(parentFragmentManager, "tag")
         }
 
-        binding.etSearch.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                searchUser(binding.etSearch.text.toString())
-                binding.etSearch.clearFocus() // Remove focus
-                val imm =
-                    requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.hideSoftInputFromWindow(binding.etSearch.windowToken, 0) // Hide keyboard
-                true
-            } else {
-                false
-            }
-        }
-
-    }
-
-
-    private fun searchUser(userName: String) {
-        Log.d("WLDN HF", "searchUser: $userName")
-    }
-
-    private fun stopLoadingIndicator() {
-        if (binding.srlUserList.isRefreshing) {
-            binding.srlUserList.isRefreshing = false
-        }
     }
 }

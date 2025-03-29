@@ -27,7 +27,7 @@ abstract class BaseBottomSheetDialogFragment<VB : ViewBinding> : BottomSheetDial
         return binding.root
     }
 
-    protected fun expandFull(coordinatorLayout: CoordinatorLayout?) {
+    protected fun expandFull(coordinatorLayout: CoordinatorLayout?, isDraggable: Boolean = true) {
         coordinatorLayout?.minimumHeight = Resources.getSystem().displayMetrics.heightPixels
 
         dialog?.setOnShowListener { dialog ->
@@ -36,6 +36,7 @@ abstract class BaseBottomSheetDialogFragment<VB : ViewBinding> : BottomSheetDial
             bottomSheet?.let {
                 BottomSheetBehavior.from(it).state = BottomSheetBehavior.STATE_EXPANDED
                 BottomSheetBehavior.from(it).skipCollapsed = true
+                BottomSheetBehavior.from(it).isDraggable = isDraggable
 //                BottomSheetBehavior.from(it).setPeekHeight(0)
             }
         }

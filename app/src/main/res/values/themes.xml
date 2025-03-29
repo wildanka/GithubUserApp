@@ -38,5 +38,11 @@
         <item name="cornerSizeBottomLeft">0dp</item>
     </style>
 
+    <style name="CardLikeConstraintLayout">
+        <item name="android:background">@drawable/bg_card</item>
+        <item name="android:elevation">4dp</item>
+        <item name="android:padding">16dp</item>
+    </style>
+
     <style name="Theme.HcsGithubUser" parent="Base.Theme.HcsGithubUser" />
 </resources>

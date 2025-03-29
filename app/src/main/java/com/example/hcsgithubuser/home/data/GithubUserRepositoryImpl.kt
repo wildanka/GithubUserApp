@@ -3,7 +3,7 @@ package com.example.hcsgithubuser.home.data
 import com.example.hcsgithubuser.base.data.ApiResponse
 import com.example.hcsgithubuser.home.data.local.dao.GithubUserDao
 import com.example.hcsgithubuser.home.data.mapper.GithubUserDtoToEntMapper
-import com.example.hcsgithubuser.home.data.remote.GithubService
+import com.example.hcsgithubuser.common.data.remote.GithubService
 import com.example.hcsgithubuser.home.data.remote.response.GithubUserDto
 
 class GithubUserRepositoryImpl(private val githubServiceApi: GithubService, private val githubUserDao: GithubUserDao) : GithubUserRepository {
@@ -32,26 +32,6 @@ class GithubUserRepositoryImpl(private val githubServiceApi: GithubService, priv
         }
     }
 
-    override suspend fun searchUser(
-        page: Int,
-        username: String
-    ): ApiResponse<List<GithubUserDto>> {
-        val response = githubServiceApi.searchUser(page, 40, username)
 
-
-        if (response.isSuccessful) {
-            val body = response.body()
-            return if (body != null) {
-                ApiResponse.Success(
-                    data = body.items.orEmpty()
-                )
-            } else {
-                ApiResponse.Empty
-            }
-
-        } else {
-            return ApiResponse.Error(response.message())
-        }
-    }
 
 }

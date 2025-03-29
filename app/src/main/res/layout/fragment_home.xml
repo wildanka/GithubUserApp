@@ -29,9 +29,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
             app:cardCornerRadius="24dp"
             app:cardElevation="4dp">  <!-- Make it clickable -->
 
@@ -43,6 +40,7 @@
 
                 <!-- Search Icon -->
                 <ImageView
+                    android:contentDescription="@string/search"
                     android:id="@+id/ivSearchIcon"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
@@ -54,22 +52,22 @@
                     app:tint="@color/gray" />
 
                 <!-- Search Input -->
-                <EditText
-                    android:id="@+id/etSearch"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:hint="Search .."
-                    android:imeOptions="actionSearch"
-                    android:inputType="text"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/ivSearchIcon"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="Autofill" />
+<!--                <EditText-->
+<!--                    android:id="@+id/etSearch"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@null"-->
+<!--                    android:hint="Search .."-->
+<!--                    android:imeOptions="actionSearch"-->
+<!--                    android:inputType="text"-->
+<!--                    android:singleLine="true"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="18sp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/ivSearchIcon"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    tools:ignore="Autofill" />-->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>

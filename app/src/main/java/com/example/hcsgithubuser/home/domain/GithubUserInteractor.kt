@@ -8,5 +8,4 @@ class GithubUserInteractor(private val githubUserRepository: GithubUserRepositor
     override suspend fun fetchUserList(page: Int, lastId: Int?) : ApiResponse<List<GithubUserDto>> {
         return githubUserRepository.fetchUsers(page, lastId)
     }
-
 }
