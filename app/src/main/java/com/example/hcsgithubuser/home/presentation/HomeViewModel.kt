@@ -1,7 +1,6 @@
 package com.example.hcsgithubuser.home.presentation
 
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -63,7 +62,6 @@ class HomeViewModel(private val githubUserUseCase: GithubUserUseCase, private va
 
     fun loadUserDataRemotely() {
         if(AppUtility.isNetworkAvailable()){
-            Log.d("WLDN HVM", "triggerSomething have network: ")
             fetchGithubUser()
         }else{
             _isLoading.value = false
