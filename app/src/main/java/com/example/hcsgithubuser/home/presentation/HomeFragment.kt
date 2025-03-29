@@ -10,7 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.hcsgithubuser.base.presentation.BaseFragment
+import com.example.arch.base.presentation.BaseFragment
 import com.example.hcsgithubuser.databinding.FragmentHomeBinding
 import com.example.hcsgithubuser.home.presentation.adapter.GithubUserPagingAdapter
 import com.example.hcsgithubuser.search.presentation.SearchFragment
@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class HomeFragment : BaseFragment<FragmentHomeBinding>() {
+class HomeFragment : com.example.arch.base.presentation.BaseFragment<FragmentHomeBinding>() {
 
     private val viewModel: HomeViewModel by viewModel()
 

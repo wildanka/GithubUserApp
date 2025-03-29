@@ -1,6 +1,6 @@
 package com.example.hcsgithubuser.home.data
 
-import com.example.hcsgithubuser.base.data.ApiResponse
+import com.example.arch.base.data.ApiResponse
 import com.example.hcsgithubuser.common.data.remote.GithubService
 import com.example.hcsgithubuser.home.data.local.dao.GithubUserDao
 import com.example.hcsgithubuser.home.data.mapper.GithubUserDtoToEntMapper
@@ -8,7 +8,7 @@ import com.example.hcsgithubuser.home.data.remote.response.GithubUserDto
 
 class GithubUserRepositoryImpl(private val githubServiceApi: GithubService, private val githubUserDao: GithubUserDao) : GithubUserRepository {
 
-    override suspend fun fetchUsers(page: Int, lastId: Int?): ApiResponse<List<GithubUserDto>> {
+    override suspend fun fetchUsers(page: Int, lastId: Int?): com.example.arch.base.data.ApiResponse<List<GithubUserDto>> {
         val response = githubServiceApi.getUsersAt(page, lastId)
 
         if (response.isSuccessful) {
@@ -21,14 +21,14 @@ class GithubUserRepositoryImpl(private val githubServiceApi: GithubService, priv
                 }
                 githubUserDao.insertAll(newRemoteData)
 
-                ApiResponse.Success(
+                com.example.arch.base.data.ApiResponse.Success(
                     data = body
                 )
             } else {
-                ApiResponse.Empty
+                com.example.arch.base.data.ApiResponse.Empty
             }
         } else {
-            return ApiResponse.Error(response.message())
+            return com.example.arch.base.data.ApiResponse.Error(response.message())
         }
     }
 

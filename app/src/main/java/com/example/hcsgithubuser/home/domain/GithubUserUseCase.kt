@@ -1,8 +1,8 @@
 package com.example.hcsgithubuser.home.domain
 
-import com.example.hcsgithubuser.base.data.ApiResponse
+import com.example.arch.base.data.ApiResponse
 import com.example.hcsgithubuser.home.data.remote.response.GithubUserDto
 
 interface GithubUserUseCase {
-    suspend fun fetchUserList(page: Int, lastId: Int?) : ApiResponse<List<GithubUserDto>>
+    suspend fun fetchUserList(page: Int, lastId: Int?) : com.example.arch.base.data.ApiResponse<List<GithubUserDto>>
 }

@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.hcsgithubuser.base.data.ApiResponse
-import com.example.hcsgithubuser.base.data.UiState
+import com.example.arch.base.data.ApiResponse
+import com.example.arch.base.data.UiState
 import com.example.hcsgithubuser.framework.AppUtility
 import com.example.hcsgithubuser.framework.Event
 import com.example.hcsgithubuser.home.data.remote.response.GithubUserDto
@@ -28,8 +28,9 @@ class SearchViewModel(private val searchUserUseCase: SearchUserUseCase): ViewMod
     private val _errorMessage = MutableLiveData<Event<String>>()
     val errorMessage: LiveData<Event<String>> = _errorMessage // TODO : Error handling
 
-    private val _userList = MutableStateFlow<UiState<List<GithubUserDto>>>(UiState.Loading)
-    val userList: StateFlow<UiState<List<GithubUserDto>>> = _userList
+    private val _userList = MutableStateFlow<com.example.arch.base.data.UiState<List<GithubUserDto>>>(
+        com.example.arch.base.data.UiState.Loading)
+    val userList: StateFlow<com.example.arch.base.data.UiState<List<GithubUserDto>>> = _userList
 
     init {
         observeQuery()
@@ -60,7 +61,7 @@ class SearchViewModel(private val searchUserUseCase: SearchUserUseCase): ViewMod
         if(AppUtility.isNetworkAvailable()){
             page = 0
             coroutineJob?.cancel()
-            _userList.value = UiState.Loading
+            _userList.value = com.example.arch.base.data.UiState.Loading
             searchByUsername(username)
         }else{
             _isLoading.value = false
@@ -76,24 +77,24 @@ class SearchViewModel(private val searchUserUseCase: SearchUserUseCase): ViewMod
             _isLoading.value = true
             page++
             when(val result = searchUserUseCase.searchByUsername(username, page)){
-                is ApiResponse.Success -> {
-                    val currentList = (userList.value as? UiState.Success)?.data ?: emptyList()
+                is com.example.arch.base.data.ApiResponse.Success -> {
+                    val currentList = (userList.value as? com.example.arch.base.data.UiState.Success)?.data ?: emptyList()
                     val newList = currentList + result.data.items.orEmpty() // Append new data
 
                     result.data.totalCount?.let {
                         maxResultCount = it
                     }
 
-                    _userList.value = UiState.Success(data = newList)
+                    _userList.value = com.example.arch.base.data.UiState.Success(data = newList)
                     _isLoading.value = false
 
                 }
-                is ApiResponse.Empty -> {
-                    _userList.value = UiState.Loading
+                is com.example.arch.base.data.ApiResponse.Empty -> {
+                    _userList.value = com.example.arch.base.data.UiState.Loading
                     _isLoading.value = false
                 }
-                is ApiResponse.Error -> {
-                    _userList.value = UiState.Error(errorMessage = result.errorMessage)
+                is com.example.arch.base.data.ApiResponse.Error -> {
+                    _userList.value = com.example.arch.base.data.UiState.Error(errorMessage = result.errorMessage)
                     page--
                     _isLoading.value = false
                 }

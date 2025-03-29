@@ -1,4 +1,4 @@
-package com.example.hcsgithubuser.base.data.mapper
+package com.example.arch.base.data.mapper
 
 interface ListMapper<S, D> : Mapper<S, D> {
 

@@ -1,7 +1,7 @@
 package com.example.hcsgithubuser.common.di
 
 import com.chuckerteam.chucker.api.ChuckerInterceptor
-import com.example.hcsgithubuser.base.data.AuthInterceptor
+import com.example.arch.base.data.AuthInterceptor
 import com.example.hcsgithubuser.common.data.remote.GithubService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -27,7 +27,7 @@ val commonModule = module {
         OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
             .addInterceptor(get<ChuckerInterceptor>()) // Inject ChuckerInterceptor from Koin
-            .addInterceptor(AuthInterceptor())
+            .addInterceptor(com.example.arch.base.data.AuthInterceptor())
             .build()
     }
 

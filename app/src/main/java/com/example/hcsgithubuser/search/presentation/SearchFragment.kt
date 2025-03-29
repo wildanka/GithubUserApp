@@ -9,8 +9,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.hcsgithubuser.base.data.UiState
-import com.example.hcsgithubuser.base.presentation.BaseBottomSheetDialogFragment
+import com.example.arch.base.data.UiState
+import com.example.arch.base.presentation.BaseBottomSheetDialogFragment
 import com.example.hcsgithubuser.databinding.FragmentSearchBinding
 import com.example.hcsgithubuser.home.presentation.adapter.GithubUserListAdapter
 import kotlinx.coroutines.launch
@@ -46,8 +46,7 @@ class SearchFragment : BaseBottomSheetDialogFragment<FragmentSearchBinding>() {
                             //TODO : handle error UI here
 //                            stopLoadingIndicator()
                         }
-
-                        UiState.Loading -> {
+                        is UiState.Loading -> {
 //                            if (viewModel.page == 1) {
 //                                binding.srlUserList.isRefreshing = true
 //                            }

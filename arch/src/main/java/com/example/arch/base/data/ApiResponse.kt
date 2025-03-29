@@ -1,4 +1,4 @@
-package com.example.hcsgithubuser.base.data
+package com.example.arch.base.data
 
 sealed class ApiResponse<out R> {
     data class Success<out T>(val data: T) : ApiResponse<T>()

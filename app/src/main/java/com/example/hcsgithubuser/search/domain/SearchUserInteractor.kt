@@ -1,6 +1,6 @@
 package com.example.hcsgithubuser.search.domain
 
-import com.example.hcsgithubuser.base.data.ApiResponse
+import com.example.arch.base.data.ApiResponse
 import com.example.hcsgithubuser.home.data.remote.response.GithubUserResponse
 import com.example.hcsgithubuser.search.data.SearchUserRepository
 import kotlinx.coroutines.Dispatchers
@@ -12,7 +12,7 @@ class SearchUserInteractor(private val searchUserRepository: SearchUserRepositor
     override suspend fun searchByUsername(
         username: String,
         page: Int
-    ): ApiResponse<GithubUserResponse> {
+    ): com.example.arch.base.data.ApiResponse<GithubUserResponse> {
         return withContext(Dispatchers.IO){
             searchUserRepository.searchUser(page, username)
         }

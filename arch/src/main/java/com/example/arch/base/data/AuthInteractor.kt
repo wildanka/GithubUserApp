@@ -1,7 +1,7 @@
-package com.example.hcsgithubuser.base.data
+package com.example.arch.base.data
 
-import com.example.hcsgithubuser.BuildConfig.GITHUB_API_VERSION
-import com.example.hcsgithubuser.BuildConfig.GITHUB_TOKEN
+import com.example.arch.BuildConfig.GITHUB_API_VERSION
+import com.example.arch.BuildConfig.GITHUB_TOKEN
 import okhttp3.Interceptor
 import okhttp3.Response
 

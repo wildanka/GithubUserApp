@@ -1,4 +1,4 @@
-package com.example.hcsgithubuser.base.presentation
+package com.example.arch.base.presentation
 
 import android.content.res.Resources
 import android.os.Bundle

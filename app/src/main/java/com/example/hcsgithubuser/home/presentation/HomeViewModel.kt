@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import com.example.hcsgithubuser.base.data.ApiResponse
-import com.example.hcsgithubuser.base.presentation.BaseViewModel
+import com.example.arch.base.data.ApiResponse
+import com.example.arch.base.presentation.BaseViewModel
 import com.example.hcsgithubuser.framework.AppUtility
 import com.example.hcsgithubuser.framework.Event
 import com.example.hcsgithubuser.home.data.local.GithubUserDatabase
@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class HomeViewModel(private val githubUserUseCase: GithubUserUseCase, private val database: GithubUserDatabase) : BaseViewModel() {
+class HomeViewModel(private val githubUserUseCase: GithubUserUseCase, private val database: GithubUserDatabase) : com.example.arch.base.presentation.BaseViewModel() {
 
     private var coroutineJob: Job? = null
     var page = 0
@@ -77,14 +77,14 @@ class HomeViewModel(private val githubUserUseCase: GithubUserUseCase, private va
             _isLoading.value = true
             page++
             when (val result = githubUserUseCase.fetchUserList(page, lastId)) {
-                is ApiResponse.Success -> {
+                is com.example.arch.base.data.ApiResponse.Success -> {
                     lastId = result.data.lastOrNull()?.id
                     _isLoading.value = false
                 }
-                is ApiResponse.Empty -> {
+                is com.example.arch.base.data.ApiResponse.Empty -> {
                     _isLoading.value = false
                 }
-                is ApiResponse.Error -> {
+                is com.example.arch.base.data.ApiResponse.Error -> {
                     page--
                     _isLoading.value = false
                 }

@@ -3,7 +3,7 @@ package com.example.hcsgithubuser.home.di
 import android.content.Context
 import androidx.room.Room
 import com.chuckerteam.chucker.api.ChuckerInterceptor
-import com.example.hcsgithubuser.base.data.AuthInterceptor
+import com.example.arch.base.data.AuthInterceptor
 import com.example.hcsgithubuser.home.data.GithubUserRepository
 import com.example.hcsgithubuser.home.data.GithubUserRepositoryImpl
 import com.example.hcsgithubuser.home.data.local.GithubUserDatabase
@@ -39,7 +39,7 @@ val githubUserModule = module {
         OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
             .addInterceptor(get<ChuckerInterceptor>()) // Inject ChuckerInterceptor from Koin
-            .addInterceptor(AuthInterceptor())
+            .addInterceptor(com.example.arch.base.data.AuthInterceptor())
             .build()
     }
 

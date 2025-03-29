@@ -23,7 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.hcsgithubuser.base.data.UiState
+import com.example.arch.base.data.UiState
 import com.example.hcsgithubuser.detail.presentation.component.ProfileSection
 import com.example.hcsgithubuser.detail.presentation.component.StatItem
 import com.example.hcsgithubuser.detail.presentation.viewmodel.ProfileDetailViewModel
@@ -36,13 +36,13 @@ fun ProfileScreen(
     modifier: Modifier = Modifier,
     viewModel: ProfileDetailViewModel = koinViewModel()
 ) {
-    viewModel.userDetail.collectAsState(initial = UiState.Loading).value.let { uiState ->
+    viewModel.userDetail.collectAsState(initial = com.example.arch.base.data.UiState.Loading).value.let { uiState ->
         when (uiState) {
-            is UiState.Loading -> {
+            is com.example.arch.base.data.UiState.Loading -> {
                 //TODO : show shimmerlayout effect
                 viewModel.checkDetailFromDb(userId, username)
             }
-            is UiState.Success -> {
+            is com.example.arch.base.data.UiState.Success -> {
                 val data = uiState.data
                 UserDetailContent(
                     name = data.name.orEmpty(),
@@ -58,7 +58,7 @@ fun ProfileScreen(
                 )
             }
 
-            is UiState.Error -> {
+            is com.example.arch.base.data.UiState.Error -> {
                 //TODO : showError
             }
         }

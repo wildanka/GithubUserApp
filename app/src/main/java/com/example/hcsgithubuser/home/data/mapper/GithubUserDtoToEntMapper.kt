@@ -1,10 +1,11 @@
 package com.example.hcsgithubuser.home.data.mapper
 
-import com.example.hcsgithubuser.base.data.mapper.ListMapper
+import com.example.arch.base.data.mapper.ListMapper
 import com.example.hcsgithubuser.home.data.local.entity.GithubUserEntity
 import com.example.hcsgithubuser.home.data.remote.response.GithubUserDto
 
-object GithubUserDtoToEntMapper : ListMapper<GithubUserDto, GithubUserEntity>{
+object GithubUserDtoToEntMapper :
+    com.example.arch.base.data.mapper.ListMapper<GithubUserDto, GithubUserEntity> {
     override fun map(source: GithubUserDto): GithubUserEntity {
          return GithubUserEntity(
             id = source.id,

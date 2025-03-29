@@ -21,4 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "HcsGithubUser"
 include(":app")
- 
+include(":common")
+include(":arch")
