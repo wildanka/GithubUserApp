@@ -1,4 +1,4 @@
-package com.example.hcsgithubuser.home.data.remote
+package com.example.hcsgithubuser.common.data.remote
 
 import com.example.hcsgithubuser.home.data.remote.response.GithubUserDto
 import com.example.hcsgithubuser.home.data.remote.response.GithubUserResponse

@@ -1,7 +1,9 @@
 package com.example.hcsgithubuser
 
 import android.app.Application
+import com.example.hcsgithubuser.common.di.commonModule
 import com.example.hcsgithubuser.home.di.githubUserModule
+import com.example.hcsgithubuser.search.di.searchModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -20,7 +22,7 @@ class HcsGithubUserApp : Application() {
         startKoin {
             androidLogger()
             androidContext(this@HcsGithubUserApp)
-            modules(githubUserModule)
+            modules(commonModule, githubUserModule, searchModule)
         }
     }
 }
