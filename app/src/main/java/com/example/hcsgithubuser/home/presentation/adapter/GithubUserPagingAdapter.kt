@@ -1,5 +1,6 @@
 package com.example.hcsgithubuser.home.presentation.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.example.hcsgithubuser.databinding.ItemGithubUserBinding
+import com.example.hcsgithubuser.detail.DetailActivity
 import com.example.hcsgithubuser.home.data.local.entity.GithubUserEntity
 
 class GithubUserPagingAdapter() :
@@ -36,6 +38,11 @@ class GithubUserPagingAdapter() :
                 .circleCrop()
                 .into(binding.imageView)
             binding.tvUsername.text = githubUser?.login
+
+            binding.root.setOnClickListener {
+                val intent = Intent(binding.root.context, DetailActivity::class.java)
+                binding.root.context.startActivity(intent)
+            }
         }
     }
 
