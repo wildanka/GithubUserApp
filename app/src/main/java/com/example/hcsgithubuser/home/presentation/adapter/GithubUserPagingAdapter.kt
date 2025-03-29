@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.example.hcsgithubuser.databinding.ItemGithubUserBinding
-import com.example.hcsgithubuser.detail.DetailActivity
+import com.example.hcsgithubuser.detail.presentation.DetailActivity
 import com.example.hcsgithubuser.home.data.local.entity.GithubUserEntity
 
 class GithubUserPagingAdapter() :

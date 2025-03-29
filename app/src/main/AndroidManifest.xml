@@ -17,7 +17,7 @@
         android:theme="@style/Theme.HcsGithubUser"
         tools:targetApi="31">
         <activity
-            android:name=".detail.DetailActivity"
+            android:name=".detail.presentation.DetailActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
