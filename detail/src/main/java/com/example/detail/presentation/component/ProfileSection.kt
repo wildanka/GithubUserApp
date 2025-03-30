@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -46,7 +47,7 @@ fun ProfileSection(
                 .padding(8.dp)
                 .size(80.dp)
                 .clip(CircleShape)
-                .border(2.dp, Color.White, CircleShape),
+                .border(2.dp, MaterialTheme.colorScheme.onPrimary, CircleShape),
         )
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -59,7 +60,7 @@ fun ProfileSection(
         }
         Text(
             text = locationText,
-            color = Color.White,
+            color = MaterialTheme.colorScheme.onBackground,
             fontWeight = FontWeight.Bold,
             fontSize = 18.sp,
             textAlign = TextAlign.Center
@@ -83,7 +84,7 @@ fun ProfileSection(
 
             Text(
                 text = "$text\n$bio",
-                color = Color.LightGray,
+                color = MaterialTheme.colorScheme.primary,
                 fontSize = 14.sp,
                 textAlign = TextAlign.Center
             )

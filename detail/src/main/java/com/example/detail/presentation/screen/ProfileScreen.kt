@@ -32,11 +32,6 @@ val tabItems = listOf(
         title = "Following",
         unselectedIcon = Icons.Outlined.Person,
         selectedIcon = Icons.Filled.Person
-    ),
-    TabItem(
-        title = "Repository",
-        unselectedIcon = Icons.Outlined.Book,
-        selectedIcon = Icons.Filled.Book
     )
 )
 
@@ -68,6 +63,7 @@ fun ProfileScreen(
                 //TODO : show shimmerlayout effect
                 viewModel.checkDetailFromDb(userId, username)
                 UserDetailContent(
+                    loginUsername = "loginUsername",
                     name = "-",
                     followers = 0,
                     following = 0,
@@ -90,6 +86,7 @@ fun ProfileScreen(
             is UiState.Success -> {
                 val data = uiState.data
                 UserDetailContent(
+                    loginUsername = data.login.orEmpty(),
                     name = data.name.orEmpty(),
                     followers = data.followers ?: 0,
                     following = data.following ?: 0,

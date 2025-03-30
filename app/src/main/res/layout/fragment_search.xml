@@ -13,6 +13,7 @@
         android:focusableInTouchMode="true">
 
         <View
+            android:visibility="invisible"
             android:id="@+id/vLine1"
             android:layout_width="64dp"
             android:layout_height="2dp"

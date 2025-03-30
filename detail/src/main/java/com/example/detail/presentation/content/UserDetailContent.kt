@@ -1,6 +1,6 @@
 package com.example.detail.presentation.content
 
-import androidx.compose.foundation.background
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,6 +22,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
@@ -37,13 +38,20 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.core.common.presentation.ui.theme.HcsGithubUserTheme
+import com.example.detail.presentation.component.FollowersList
+import com.example.detail.presentation.component.FollowingList
 import com.example.detail.presentation.component.ProfileSection
 import com.example.detail.presentation.component.StatItem
 import com.example.detail.presentation.screen.tabItems
+import com.example.detail.presentation.viewmodel.ProfileDetailViewModel
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun UserDetailContent(
+    viewModel: ProfileDetailViewModel = koinViewModel(),
+    loginUsername: String,
     name: String,
     followers: Int,
     following: Int,
@@ -60,106 +68,106 @@ fun UserDetailContent(
     onTabSelected: (Int) -> Unit,
     onBackClick: () -> Unit
 ) {
-    LazyColumn(
+    val followersList = viewModel.getFollowers(loginUsername).collectAsLazyPagingItems()
+
+    Column(
         modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(bottom = 16.dp) // Extra space for scrolling
     ) {
-        item {
-            // Back Button
-            IconButton(
-                onClick = { onBackClick() },
-                modifier = Modifier.padding(16.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = "Back",
-                    tint = Color.White
-                )
-            }
-        }
-
-        item { Spacer(modifier = Modifier.height(16.dp)) }
-
-        // Profile Section
-        item {
-            ProfileSection(
-                name = name,
-                location = location,
-                avatarUrl = avatarUrl,
-                bio = bio,
-                email = email,
-                twitterUsername = twitterUsername,
+        // Back Button
+        IconButton(
+            onClick = { onBackClick() },
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Icon(
+                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                contentDescription = "Back",
+                tint = MaterialTheme.colorScheme.onBackground
             )
         }
+        Spacer(modifier = Modifier.height(16.dp))
 
-        item { Spacer(modifier = Modifier.height(16.dp)) }
+        // Profile Section
+        ProfileSection(
+            name = name,
+            location = location,
+            avatarUrl = avatarUrl,
+            bio = bio,
+            email = email,
+            twitterUsername = twitterUsername,
+        )
+
+
+        Spacer(modifier = Modifier.height(16.dp))
 
         // Stats Section
-        item {
-            Card(
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
+                .clip(RoundedCornerShape(16.dp)),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            elevation = CardDefaults.cardElevation(4.dp)
+        ) {
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-                    .clip(RoundedCornerShape(16.dp)),
-                colors = CardDefaults.cardColors(containerColor = Color.White),
-                elevation = CardDefaults.cardElevation(4.dp)
+                    .padding(16.dp),
+                horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    horizontalArrangement = Arrangement.SpaceEvenly
-                ) {
-                    StatItem(title = "Followers", count = followers)
-                    StatItem(title = "Following", count = following)
-                    StatItem(title = "Repository", count = publicRepo)
-                }
+                StatItem(title = "Followers", count = followers)
+                StatItem(title = "Following", count = following)
+                StatItem(title = "Repository", count = publicRepo)
             }
         }
 
-        item { Spacer(modifier = Modifier.height(16.dp)) }
 
-        item {
-            Column(modifier = Modifier.fillMaxSize()) {
-                TabRow(selectedTabIndex = selectedTabIndex) {
-                    tabItems.forEachIndexed { index, tabItem ->
-                        Tab(
-                            selected = index == selectedTabIndex,
-                            onClick = { onTabSelected(index) },
-                            text = { Text(text = tabItem.title) },
-                            icon = {
-                                Icon(
-                                    imageVector = if (index == selectedTabIndex) {
-                                        tabItem.selectedIcon
-                                    } else {
-                                        tabItem.unselectedIcon
-                                    },
-                                    contentDescription = tabItem.title,
-                                )
-                            }
-                        )
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Column(modifier = Modifier.fillMaxSize()) {
+            TabRow(selectedTabIndex = selectedTabIndex) {
+                tabItems.forEachIndexed { index, tabItem ->
+                    Tab(
+                        selected = index == selectedTabIndex,
+                        onClick = { onTabSelected(index) },
+                        text = { Text(text = tabItem.title) },
+                        icon = {
+                            Icon(
+                                imageVector = if (index == selectedTabIndex) {
+                                    tabItem.selectedIcon
+                                } else {
+                                    tabItem.unselectedIcon
+                                },
+                                contentDescription = tabItem.title,
+                            )
+                        }
+                    )
+                }
+            }
+            HorizontalPager(
+                state = pagerState,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f) // Make sure it fills remaining space
+            ) { index ->
+                when(selectedTabIndex){
+                    0 -> FollowersList(followersList)
+                    1 -> {
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(text = tabItems[index].title)
+                        }
                     }
                 }
-                HorizontalPager(
-                    state = pagerState,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f) // Make sure it fills remaining space
-                ) { index ->
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(text = tabItems[index].title)
-                    }
-                }
+
             }
         }
     }
 }
 
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun UserDetailContentPreview() {
     HcsGithubUserTheme {
@@ -191,7 +199,8 @@ private fun UserDetailContentPreview() {
             onBackClick = {},
             onTabSelected = { selectedPosition ->
                 selectedTabIndex = selectedPosition
-            }
+            },
+            loginUsername = "-",
         )
     }
 }

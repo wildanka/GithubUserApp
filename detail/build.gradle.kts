@@ -46,6 +46,7 @@ dependencies {
     implementation(project(":core"))
     // Koin for Android
     implementation(libs.bundles.koin)
+    implementation(libs.androidx.media3.common.ktx)
     // Koin Annotations KSP Compiler
     ksp(libs.koin.ksp.compiler)
 
@@ -72,6 +73,7 @@ dependencies {
     implementation(libs.moshi.kotlin)
     implementation(libs.okhttp)
     implementation(libs.androidx.paging.runtime.ktx)
+    implementation(libs.androidx.paging.compose)
     ksp(libs.moshi.kotlin.codegen)
     implementation(libs.okhttp3.logging.interceptor)
     //Room

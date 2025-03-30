@@ -1,6 +1,7 @@
 package com.example.core.common.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.LightGray
 
 // Primary Green Shades
 val Green500 = Color(0xFF4CAF50)  // Default Primary Green
@@ -26,5 +27,7 @@ val Red900 = Color(0xFFC62828)  // Deep red error
 
 // Text and Surface Colors
 val Black = Color(0xFF000000)
+val LightGray = Color(0xFFCCCCCC)
+val DarkGray = Color(0xFF252525)
 val White = Color(0xFFFFFFFF)
 
