@@ -1,7 +1,7 @@
 package com.example.hcsgithubuser.detail.data.remote
 
-import com.example.common.data.remote.GithubService
-import com.example.common.data.remote.response.GithubUserDetailDto
+import com.example.core.network.GithubService
+import com.example.core.network.response.GithubUserDetailDto
 import retrofit2.Response
 
 class DetailUserRemoteDataSourceImpl(private val api: GithubService) : DetailUserRemoteDataSource{

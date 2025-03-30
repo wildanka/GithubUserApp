@@ -1,7 +1,7 @@
 package com.example.hcsgithubuser.detail.data.local
 
-import com.example.hcsgithubuser.detail.data.local.dao.GithubUserDetailDao
-import com.example.hcsgithubuser.detail.data.local.entity.GithubUserDetailEntity
+import com.example.core.database.dao.GithubUserDetailDao
+import com.example.core.database.entity.GithubUserDetailEntity
 import kotlinx.coroutines.flow.Flow
 
 

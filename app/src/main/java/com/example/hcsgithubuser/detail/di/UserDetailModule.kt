@@ -9,11 +9,7 @@ import com.example.hcsgithubuser.detail.data.remote.DetailUserRemoteDataSourceIm
 import com.example.hcsgithubuser.detail.domain.DetailUserInteractor
 import com.example.hcsgithubuser.detail.domain.DetailUserUseCase
 import com.example.hcsgithubuser.detail.presentation.viewmodel.ProfileDetailViewModel
-import com.example.hcsgithubuser.home.data.GithubUserRepository
-import com.example.hcsgithubuser.home.data.GithubUserRepositoryImpl
-import com.example.hcsgithubuser.home.data.local.GithubUserDatabase
-import com.example.hcsgithubuser.home.domain.GithubUserInteractor
-import com.example.hcsgithubuser.home.domain.GithubUserUseCase
+import com.example.core.database.GithubUserDatabase
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 

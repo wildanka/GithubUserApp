@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.arch.framework.AppUtility
 import com.example.arch.framework.Event
-import com.example.common.data.remote.response.GithubUserDto
+import com.example.core.network.response.GithubUserDto
 import com.example.hcsgithubuser.search.domain.SearchUserUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow

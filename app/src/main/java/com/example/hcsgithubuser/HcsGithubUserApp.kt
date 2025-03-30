@@ -1,7 +1,7 @@
 package com.example.hcsgithubuser
 
 import android.app.Application
-import com.example.common.di.commonModule
+import com.example.core.di.commonModule
 import com.example.hcsgithubuser.detail.di.userDetailModule
 import com.example.hcsgithubuser.home.di.githubUserModule
 import com.example.hcsgithubuser.search.di.searchModule

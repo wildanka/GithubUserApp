@@ -1,9 +1,8 @@
 package com.example.hcsgithubuser.search.data
 
-import com.example.arch.base.data.ApiResponse
-import com.example.common.data.remote.GithubService
-import com.example.common.util.Const
-import com.example.common.data.remote.response.GithubUserResponse
+import com.example.core.network.GithubService
+import com.example.core.common.presentation.util.Const
+import com.example.core.network.response.GithubUserResponse
 
 class SearchUserRepositoryImpl(private val api: GithubService) : SearchUserRepository {
     override suspend fun searchUser(

@@ -1,14 +1,13 @@
 package com.example.hcsgithubuser.detail.data
 
-import com.example.arch.base.data.ApiResponse
 import com.example.hcsgithubuser.detail.data.local.DetailUserLocalDataSource
-import com.example.hcsgithubuser.detail.data.local.entity.GithubUserDetailEntity
+import com.example.core.database.entity.GithubUserDetailEntity
 import com.example.hcsgithubuser.detail.data.mapper.GithubUserDetailDtoToEntMapper
 import com.example.hcsgithubuser.detail.data.remote.DetailUserRemoteDataSource
 import kotlinx.coroutines.flow.firstOrNull
 
 class DetailUserRepositoryImpl(private val remoteDataSource: DetailUserRemoteDataSource, private val localDataSource: DetailUserLocalDataSource) : DetailUserRepository {
-    override suspend fun getUserDetail(userId: Int, username: String): com.example.arch.base.data.ApiResponse<GithubUserDetailEntity> {
+    override suspend fun getUserDetail(userId: Int, username: String): com.example.arch.base.data.ApiResponse<com.example.core.database.entity.GithubUserDetailEntity> {
         val userLocalData = localDataSource.getUser(userId).firstOrNull()
 
         return if(userLocalData == null){
@@ -20,7 +19,7 @@ class DetailUserRepositoryImpl(private val remoteDataSource: DetailUserRemoteDat
         }
     }
 
-    private suspend fun fetchUserDetailFromRemote(username: String): com.example.arch.base.data.ApiResponse<GithubUserDetailEntity> {
+    private suspend fun fetchUserDetailFromRemote(username: String): com.example.arch.base.data.ApiResponse<com.example.core.database.entity.GithubUserDetailEntity> {
         val remoteUserDetail = remoteDataSource.getUserDetail(username)
 
         if(remoteUserDetail.isSuccessful){

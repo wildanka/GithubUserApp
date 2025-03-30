@@ -10,7 +10,7 @@ import androidx.paging.PagingConfig
 import com.example.arch.base.presentation.BaseViewModel
 import com.example.arch.framework.Event
 import com.example.arch.framework.AppUtility
-import com.example.hcsgithubuser.home.data.local.GithubUserDatabase
+import com.example.core.database.GithubUserDatabase
 import com.example.hcsgithubuser.home.domain.GithubUserUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(
     private val githubUserUseCase: GithubUserUseCase,
-    private val database: GithubUserDatabase,
+    private val database: com.example.core.database.GithubUserDatabase,
     private val context: Application
 ) : BaseViewModel() {
 

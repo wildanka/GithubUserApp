@@ -1,12 +1,10 @@
 package com.example.hcsgithubuser.home.data
 
-import com.example.arch.base.data.ApiResponse
-import com.example.common.data.remote.GithubService
-import com.example.hcsgithubuser.home.data.local.dao.GithubUserDao
+import com.example.core.network.GithubService
 import com.example.hcsgithubuser.home.data.mapper.GithubUserDtoToEntMapper
-import com.example.common.data.remote.response.GithubUserDto
+import com.example.core.network.response.GithubUserDto
 
-class GithubUserRepositoryImpl(private val githubServiceApi: GithubService, private val githubUserDao: GithubUserDao) : GithubUserRepository {
+class GithubUserRepositoryImpl(private val githubServiceApi: GithubService, private val githubUserDao: com.example.core.database.dao.GithubUserDao) : GithubUserRepository {
 
     override suspend fun fetchUsers(page: Int, lastId: Int?): com.example.arch.base.data.ApiResponse<List<GithubUserDto>> {
         val response = githubServiceApi.getUsersAt(page, lastId)

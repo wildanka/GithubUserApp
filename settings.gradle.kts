@@ -23,3 +23,5 @@ rootProject.name = "HcsGithubUser"
 include(":app")
 include(":common")
 include(":arch")
+include(":database")
+include(":core")

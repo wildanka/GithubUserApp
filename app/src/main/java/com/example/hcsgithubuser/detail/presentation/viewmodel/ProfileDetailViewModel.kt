@@ -1,20 +1,17 @@
 package com.example.hcsgithubuser.detail.presentation.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.arch.base.data.ApiResponse
-import com.example.arch.base.data.UiState
-import com.example.hcsgithubuser.detail.data.local.entity.GithubUserDetailEntity
+import com.example.core.database.entity.GithubUserDetailEntity
 import com.example.hcsgithubuser.detail.domain.DetailUserUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class ProfileDetailViewModel(private val detailUserUseCase: DetailUserUseCase) : ViewModel() {
-    private val _userDetail: MutableStateFlow<com.example.arch.base.data.UiState<GithubUserDetailEntity>> =
+    private val _userDetail: MutableStateFlow<com.example.arch.base.data.UiState<com.example.core.database.entity.GithubUserDetailEntity>> =
         MutableStateFlow(com.example.arch.base.data.UiState.Loading)
-    val userDetail: StateFlow<com.example.arch.base.data.UiState<GithubUserDetailEntity>> get() = _userDetail
+    val userDetail: StateFlow<com.example.arch.base.data.UiState<com.example.core.database.entity.GithubUserDetailEntity>> get() = _userDetail
 
 
     fun checkDetailFromDb(userId: Int, username: String) {

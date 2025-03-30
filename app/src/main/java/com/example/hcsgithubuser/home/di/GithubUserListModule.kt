@@ -3,10 +3,9 @@ package com.example.hcsgithubuser.home.di
 import android.content.Context
 import androidx.room.Room
 import com.chuckerteam.chucker.api.ChuckerInterceptor
-import com.example.common.data.remote.GithubService
+import com.example.core.network.GithubService
 import com.example.hcsgithubuser.home.data.GithubUserRepository
 import com.example.hcsgithubuser.home.data.GithubUserRepositoryImpl
-import com.example.hcsgithubuser.home.data.local.GithubUserDatabase
 import com.example.hcsgithubuser.home.domain.GithubUserInteractor
 import com.example.hcsgithubuser.home.domain.GithubUserUseCase
 import com.example.hcsgithubuser.home.presentation.HomeViewModel
@@ -67,14 +66,14 @@ val githubUserModule = module {
     single {
         Room.databaseBuilder(
             androidApplication(),
-            GithubUserDatabase::class.java,
+            com.example.core.database.GithubUserDatabase::class.java,
             "myGithubDb"
         )
             .fallbackToDestructiveMigration()
             .build()
     }
 
-    single { get<GithubUserDatabase>().githubUserDao }
+    single { get<com.example.core.database.GithubUserDatabase>().githubUserDao }
 
     viewModel {
         HomeViewModel(get(), get(), androidApplication())
