@@ -65,6 +65,7 @@ dependencies {
     implementation(libs.moshi.kotlin)
     implementation(libs.okhttp)
     implementation(libs.androidx.paging.runtime.ktx)
+    testImplementation(libs.junit.junit)
     ksp(libs.moshi.kotlin.codegen)
     implementation(libs.okhttp3.logging.interceptor)
     implementation(libs.androidx.swiperefreshlayout)
@@ -98,8 +99,12 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     //endregion compose
-
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.androidx.core.testing)
     testImplementation(libs.junit)
+    implementation(libs.kotlinx.coroutines.core)
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
