@@ -35,7 +35,9 @@ android {
     }
     buildFeatures {
         compose = true
-        viewBinding = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.15"
     }
 }
 
@@ -54,6 +56,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.material.icons.extended)
     implementation(libs.bundles.koin.compose)
     implementation(libs.bundles.coil)
     androidTestImplementation(platform(libs.androidx.compose.bom))

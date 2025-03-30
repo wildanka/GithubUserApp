@@ -23,7 +23,9 @@ class DetailActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             HcsGithubUserTheme {
-                GithubUserDetailScreen(userId, username.orEmpty())
+                GithubUserDetailScreen(userId, username.orEmpty()){
+                    onBackPressedDispatcher.onBackPressed()
+                }
             }
         }
     }
@@ -34,7 +36,8 @@ class DetailActivity : ComponentActivity() {
 fun GithubUserDetailScreen(
     userId: Int,
     username: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onBackClick: () -> Unit
 ) {
     Scaffold(
         modifier = modifier
@@ -42,7 +45,8 @@ fun GithubUserDetailScreen(
         ProfileScreen(
             userId = userId,
             username = username,
-            modifier = Modifier.padding(paddingValues = innerPadding)
+            modifier = Modifier.padding(paddingValues = innerPadding),
+            onBackClick = { onBackClick() }
         )
     }
 }
@@ -51,6 +55,8 @@ fun GithubUserDetailScreen(
 @Composable
 fun GithubUserDetailContentPreview() {
     HcsGithubUserTheme {
-        GithubUserDetailScreen(18630118, "wildanka")
+        GithubUserDetailScreen(18630118, "wildanka"){
+
+        }
     }
 }

@@ -1,48 +1,93 @@
 package com.example.detail.presentation.screen
 
-import android.util.Log
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
+import androidx.compose.material.icons.filled.Book
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.RemoveRedEye
+import androidx.compose.material.icons.outlined.Book
+import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.outlined.RemoveRedEye
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import com.example.arch.base.data.UiState
-import com.example.detail.presentation.component.ProfileSection
-import com.example.detail.presentation.component.StatItem
+import com.example.detail.domain.model.TabItem
+import com.example.detail.presentation.content.UserDetailContent
 import com.example.detail.presentation.viewmodel.ProfileDetailViewModel
 import org.koin.compose.viewmodel.koinViewModel
+
+val tabItems = listOf(
+    TabItem(
+        title = "Followers",
+        unselectedIcon = Icons.Outlined.RemoveRedEye,
+        selectedIcon = Icons.Filled.RemoveRedEye
+    ),
+    TabItem(
+        title = "Following",
+        unselectedIcon = Icons.Outlined.Person,
+        selectedIcon = Icons.Filled.Person
+    ),
+    TabItem(
+        title = "Repository",
+        unselectedIcon = Icons.Outlined.Book,
+        selectedIcon = Icons.Filled.Book
+    )
+)
 
 @Composable
 fun ProfileScreen(
     userId: Int,
     username: String,
     modifier: Modifier = Modifier,
-    viewModel: ProfileDetailViewModel = koinViewModel()
+    viewModel: ProfileDetailViewModel = koinViewModel(),
+    onBackClick: () -> Unit
 ) {
-    viewModel.userDetail.collectAsState(initial = com.example.arch.base.data.UiState.Loading).value.let { uiState ->
+
+    var selectedTabIndex by remember { mutableIntStateOf(0) }
+    val pagerState = rememberPagerState {
+        tabItems.size
+    }
+    LaunchedEffect(selectedTabIndex) {
+        pagerState.animateScrollToPage(selectedTabIndex)
+    }
+    LaunchedEffect(pagerState.currentPage, pagerState.isScrollInProgress) {
+        if(!pagerState.isScrollInProgress) {
+            selectedTabIndex = pagerState.currentPage
+        }
+    }
+
+    viewModel.userDetail.collectAsState(initial = UiState.Loading).value.let { uiState ->
         when (uiState) {
-            is com.example.arch.base.data.UiState.Loading -> {
+            is UiState.Loading -> {
                 //TODO : show shimmerlayout effect
                 viewModel.checkDetailFromDb(userId, username)
+                UserDetailContent(
+                    name = "-",
+                    followers = 0,
+                    following = 0,
+                    publicRepo = 0,
+                    company = "-",
+                    location = "-",
+                    avatarUrl = "-",
+                    bio = "-",
+                    email = "-",
+                    twitterUsername = "-",
+                    selectedTabIndex = selectedTabIndex,
+                    pagerState = pagerState,
+                    onBackClick = onBackClick,
+                    onTabSelected = { selectedPosition ->
+                        selectedTabIndex = selectedPosition
+                    }
+                )
             }
-            is com.example.arch.base.data.UiState.Success -> {
+
+            is UiState.Success -> {
                 val data = uiState.data
                 UserDetailContent(
                     name = data.name.orEmpty(),
@@ -55,10 +100,15 @@ fun ProfileScreen(
                     bio = data.bio.orEmpty(),
                     email = data.email.orEmpty(),
                     twitterUsername = data.twitterUsername.orEmpty(),
+                    selectedTabIndex = selectedTabIndex,
+                    pagerState = pagerState,
+                    onBackClick = onBackClick,
+                    onTabSelected = { selectedPosition ->
+                        selectedTabIndex = selectedPosition
+                    }
                 )
             }
-
-            is com.example.arch.base.data.UiState.Error -> {
+            is UiState.Error -> {
                 //TODO : showError
             }
         }
@@ -66,70 +116,3 @@ fun ProfileScreen(
 }
 
 
-@Composable
-fun UserDetailContent(
-    name: String,
-    followers: Int,
-    following: Int,
-    publicRepo: Int,
-    company: String,
-    location: String,
-    avatarUrl: String,
-    bio: String,
-    email: String,
-    twitterUsername: String,
-    modifier: Modifier = Modifier
-) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color(0xFF455A64)) // Dark grayish-green background
-    ) {
-        // Top App Bar
-        IconButton(
-            onClick = { /* Handle back press */ },
-            modifier = Modifier.padding(16.dp)
-        ) {
-            Icon(
-                imageVector = Icons.Default.ArrowBack,
-                contentDescription = "Back",
-                tint = Color.White
-            )
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Profile Section
-        ProfileSection(
-            name = name,
-            location = location,
-            avatarUrl = avatarUrl,
-            bio = bio,
-            email = email,
-            twitterUsername = twitterUsername,
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Stats Section
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp)
-                .clip(RoundedCornerShape(16.dp)),
-            colors = CardDefaults.cardColors(containerColor = Color.White),
-            elevation = CardDefaults.cardElevation(4.dp)
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                StatItem(title = "Followers", count = followers)
-                StatItem(title = "Following", count = following)
-                StatItem(title = "Repository", count = publicRepo)
-            }
-        }
-    }
-}
