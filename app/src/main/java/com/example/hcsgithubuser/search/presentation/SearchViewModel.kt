@@ -1,13 +1,12 @@
 package com.example.hcsgithubuser.search.presentation
 
+import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.arch.base.data.ApiResponse
-import com.example.arch.base.data.UiState
-import com.example.hcsgithubuser.framework.AppUtility
-import com.example.hcsgithubuser.framework.Event
+import com.example.arch.framework.AppUtility
+import com.example.arch.framework.Event
 import com.example.common.data.remote.response.GithubUserDto
 import com.example.hcsgithubuser.search.domain.SearchUserUseCase
 import kotlinx.coroutines.Job
@@ -18,7 +17,7 @@ import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
-class SearchViewModel(private val searchUserUseCase: SearchUserUseCase): ViewModel() {
+class SearchViewModel(private val searchUserUseCase: SearchUserUseCase, private val context: Application): ViewModel() {
     private val _query = MutableStateFlow("")
     private var page = 0
     var maxResultCount = 0
@@ -58,7 +57,7 @@ class SearchViewModel(private val searchUserUseCase: SearchUserUseCase): ViewMod
 
 
     private fun refreshList(username: String){
-        if(AppUtility.isNetworkAvailable()){
+        if(AppUtility.isNetworkAvailable(context.applicationContext)){
             page = 0
             coroutineJob?.cancel()
             _userList.value = com.example.arch.base.data.UiState.Loading

@@ -1,4 +1,4 @@
-package com.example.hcsgithubuser.framework
+package com.example.arch.framework
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow

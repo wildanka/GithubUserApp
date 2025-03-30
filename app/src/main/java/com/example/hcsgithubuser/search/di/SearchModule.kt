@@ -5,6 +5,7 @@ import com.example.hcsgithubuser.search.data.SearchUserRepositoryImpl
 import com.example.hcsgithubuser.search.domain.SearchUserInteractor
 import com.example.hcsgithubuser.search.domain.SearchUserUseCase
 import com.example.hcsgithubuser.search.presentation.SearchViewModel
+import org.koin.android.ext.koin.androidApplication
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
@@ -18,6 +19,6 @@ val searchModule = module {
     }
 
     viewModel {
-        SearchViewModel(get())
+        SearchViewModel(get(), androidApplication())
     }
 }

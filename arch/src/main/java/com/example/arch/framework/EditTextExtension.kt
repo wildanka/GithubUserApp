@@ -1,4 +1,4 @@
-package com.example.hcsgithubuser.framework
+package com.example.arch.framework
 
 import android.text.Editable
 import android.text.TextWatcher

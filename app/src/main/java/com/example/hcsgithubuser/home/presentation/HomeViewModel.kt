@@ -1,15 +1,15 @@
 package com.example.hcsgithubuser.home.presentation
 
+import android.app.Application
 import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import com.example.arch.base.data.ApiResponse
 import com.example.arch.base.presentation.BaseViewModel
-import com.example.hcsgithubuser.framework.AppUtility
-import com.example.hcsgithubuser.framework.Event
+import com.example.arch.framework.Event
+import com.example.arch.framework.AppUtility
 import com.example.hcsgithubuser.home.data.local.GithubUserDatabase
 import com.example.hcsgithubuser.home.domain.GithubUserUseCase
 import kotlinx.coroutines.Job
@@ -17,11 +17,15 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class HomeViewModel(private val githubUserUseCase: GithubUserUseCase, private val database: GithubUserDatabase) : com.example.arch.base.presentation.BaseViewModel() {
+class HomeViewModel(
+    private val githubUserUseCase: GithubUserUseCase,
+    private val database: GithubUserDatabase,
+    private val context: Application
+) : BaseViewModel() {
 
     private var coroutineJob: Job? = null
     var page = 0
-    var lastId : Int? = null
+    var lastId: Int? = null
 
     private val _isLoading = MutableStateFlow(false)  // Internal mutable state
     val isLoading: StateFlow<Boolean> = _isLoading
@@ -30,7 +34,7 @@ class HomeViewModel(private val githubUserUseCase: GithubUserUseCase, private va
 
     val items = Pager(
         PagingConfig(50)
-    ){
+    ) {
         database.githubUserDao.pagingSource()
     }.flow
 
@@ -41,19 +45,19 @@ class HomeViewModel(private val githubUserUseCase: GithubUserUseCase, private va
         loadUserDataRemotely()
     }
 
-    private fun observeData(){
+    private fun observeData() {
 
     }
 
-    fun refreshList(){
+    fun refreshList() {
         _isLoading.value = true
-        if(AppUtility.isNetworkAvailable()){
+        if (AppUtility.isNetworkAvailable(context.applicationContext)) {
             page = 0
             lastId = null
             coroutineJob?.cancel()
             _isLoading.value = false
             loadUserDataRemotely()
-        }else{
+        } else {
             _isLoading.value = false
             _errorMessage.postValue(Event("No network connection"))
         }
@@ -61,17 +65,17 @@ class HomeViewModel(private val githubUserUseCase: GithubUserUseCase, private va
 
 
     fun loadUserDataRemotely() {
-        if(AppUtility.isNetworkAvailable()){
+        if (AppUtility.isNetworkAvailable(context.applicationContext)) {
             fetchGithubUser()
-        }else{
+        } else {
             _isLoading.value = false
             _errorMessage.postValue(Event("No network connection"))
         }
     }
 
-    private fun fetchGithubUser(){
+    private fun fetchGithubUser() {
         coroutineJob = viewModelScope.launch {
-            if(isLoading.value){
+            if (isLoading.value) {
                 return@launch
             }
             _isLoading.value = true
@@ -81,9 +85,11 @@ class HomeViewModel(private val githubUserUseCase: GithubUserUseCase, private va
                     lastId = result.data.lastOrNull()?.id
                     _isLoading.value = false
                 }
+
                 is com.example.arch.base.data.ApiResponse.Empty -> {
                     _isLoading.value = false
                 }
+
                 is com.example.arch.base.data.ApiResponse.Error -> {
                     page--
                     _isLoading.value = false

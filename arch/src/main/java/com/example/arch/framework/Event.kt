@@ -1,4 +1,4 @@
-package com.example.hcsgithubuser.framework
+package com.example.arch.framework
 
 class Event<out T>(private val content: T) {
     private var hasBeenHandled = false
