@@ -49,5 +49,9 @@ class DetailUserRepositoryImpl(private val remoteDataSource: DetailUserRemoteDat
         return remoteDataSource.getFollowers(username)
     }
 
+    override fun getFollowing(username: String): Flow<PagingData<GithubUserDto>> {
+        return remoteDataSource.getFollowing(username)
+    }
+
 
 }

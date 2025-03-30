@@ -39,6 +39,9 @@ class ProfileDetailViewModel(private val detailUserUseCase: DetailUserUseCase) :
     fun getFollowers(username: String): Flow<PagingData<GithubUserDto>> {
         return detailUserUseCase.getFollowers(username).cachedIn(viewModelScope)
     }
+    fun getFollowing(username: String): Flow<PagingData<GithubUserDto>> {
+        return detailUserUseCase.getFollowing(username).cachedIn(viewModelScope)
+    }
 
 
 }

@@ -19,6 +19,10 @@ class DetailUserInteractor(private val detailUserRepository: DetailUserRepositor
         return detailUserRepository.getFollowers(username)
     }
 
+    override fun getFollowing(username: String): Flow<PagingData<GithubUserDto>> {
+        return detailUserRepository.getFollowing(username)
+
+    }
     //
 //    override suspend fun getFollowers(
 //        username: String

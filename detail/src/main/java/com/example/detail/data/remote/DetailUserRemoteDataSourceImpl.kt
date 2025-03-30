@@ -23,4 +23,14 @@ class DetailUserRemoteDataSourceImpl(private val api: GithubService) : DetailUse
             pagingSourceFactory = { FollowersPagingSource(api, username) }
         ).flow
     }
+
+    override fun getFollowing(username: String): Flow<PagingData<GithubUserDto>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 20,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = { FollowingPagingSource(api, username) }
+        ).flow
+    }
 }

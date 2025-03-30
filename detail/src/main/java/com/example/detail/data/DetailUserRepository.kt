@@ -9,5 +9,6 @@ import kotlinx.coroutines.flow.Flow
 interface DetailUserRepository {
     suspend fun getUserDetail(userId: Int, username: String): ApiResponse<GithubUserDetailEntity>
     fun getFollowers(username: String): Flow<PagingData<GithubUserDto>>
+    fun getFollowing(username: String): Flow<PagingData<GithubUserDto>>
 
 }

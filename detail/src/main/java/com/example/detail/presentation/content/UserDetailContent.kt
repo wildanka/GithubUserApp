@@ -1,6 +1,5 @@
 package com.example.detail.presentation.content
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -69,101 +68,112 @@ fun UserDetailContent(
     onBackClick: () -> Unit
 ) {
     val followersList = viewModel.getFollowers(loginUsername).collectAsLazyPagingItems()
+    val followingList = viewModel.getFollowing(loginUsername).collectAsLazyPagingItems()
 
-    Column(
+
+    LazyColumn(
         modifier = Modifier.fillMaxSize(),
+        contentPadding = PaddingValues(bottom = 16.dp)
     ) {
-        // Back Button
-        IconButton(
-            onClick = { onBackClick() },
-            modifier = Modifier.padding(16.dp)
-        ) {
-            Icon(
-                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                contentDescription = "Back",
-                tint = MaterialTheme.colorScheme.onBackground
+        item {
+            IconButton(
+                onClick = { onBackClick() },
+                modifier = Modifier.padding(16.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                    contentDescription = "Back",
+                    tint = MaterialTheme.colorScheme.onBackground
+                )
+            }
+        }
+
+        item { Spacer(modifier = Modifier.height(16.dp)) }
+
+        item {
+            ProfileSection(
+                name = name,
+                location = location,
+                avatarUrl = avatarUrl,
+                bio = bio,
+                email = email,
+                twitterUsername = twitterUsername,
             )
         }
-        Spacer(modifier = Modifier.height(16.dp))
 
-        // Profile Section
-        ProfileSection(
-            name = name,
-            location = location,
-            avatarUrl = avatarUrl,
-            bio = bio,
-            email = email,
-            twitterUsername = twitterUsername,
-        )
+        item { Spacer(modifier = Modifier.height(16.dp)) }
 
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Stats Section
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp)
-                .clip(RoundedCornerShape(16.dp)),
-            colors = CardDefaults.cardColors(containerColor = Color.White),
-            elevation = CardDefaults.cardElevation(4.dp)
-        ) {
-            Row(
+        item {
+            Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
-                horizontalArrangement = Arrangement.SpaceEvenly
+                    .padding(horizontal = 16.dp)
+                    .clip(RoundedCornerShape(16.dp)),
+                colors = CardDefaults.cardColors(containerColor = Color.White),
+                elevation = CardDefaults.cardElevation(4.dp)
             ) {
-                StatItem(title = "Followers", count = followers)
-                StatItem(title = "Following", count = following)
-                StatItem(title = "Repository", count = publicRepo)
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
+                    StatItem(title = "Followers", count = followers)
+                    StatItem(title = "Following", count = following)
+                    StatItem(title = "Repository", count = publicRepo)
+                }
             }
         }
 
+        item { Spacer(modifier = Modifier.height(16.dp)) }
 
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Column(modifier = Modifier.fillMaxSize()) {
-            TabRow(selectedTabIndex = selectedTabIndex) {
-                tabItems.forEachIndexed { index, tabItem ->
-                    Tab(
-                        selected = index == selectedTabIndex,
-                        onClick = { onTabSelected(index) },
-                        text = { Text(text = tabItem.title) },
-                        icon = {
-                            Icon(
-                                imageVector = if (index == selectedTabIndex) {
-                                    tabItem.selectedIcon
-                                } else {
-                                    tabItem.unselectedIcon
-                                },
-                                contentDescription = tabItem.title,
-                            )
-                        }
-                    )
-                }
-            }
-            HorizontalPager(
-                state = pagerState,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f) // Make sure it fills remaining space
-            ) { index ->
-                when(selectedTabIndex){
-                    0 -> FollowersList(followersList)
-                    1 -> {
-                        Box(
-                            modifier = Modifier.fillMaxSize(),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text(text = tabItems[index].title)
-                        }
+        item {
+            Column(modifier = Modifier.fillMaxWidth()) {
+                TabRow(selectedTabIndex = selectedTabIndex) {
+                    tabItems.forEachIndexed { index, tabItem ->
+                        Tab(
+                            selected = index == selectedTabIndex,
+                            onClick = { onTabSelected(index) },
+                            text = { Text(text = tabItem.title) },
+                            icon = {
+                                Icon(
+                                    imageVector = if (index == selectedTabIndex) {
+                                        tabItem.selectedIcon
+                                    } else {
+                                        tabItem.unselectedIcon
+                                    },
+                                    contentDescription = tabItem.title,
+                                )
+                            }
+                        )
                     }
                 }
 
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(500.dp) // Ensure it has enough space
+                ) {
+                    HorizontalPager(
+                        state = pagerState,
+                        modifier = Modifier.fillMaxSize()
+                    ) { index ->
+                        when (index) {
+                            0 -> FollowersList(followersList)
+                            1 -> FollowingList(followingList)
+//                            1 -> Box(
+//                                modifier = Modifier.fillMaxSize(),
+//                                contentAlignment = Alignment.Center
+//                            ) {
+//                                Text(text = tabItems[index].title)
+//                            }
+                        }
+                    }
+                }
             }
         }
     }
+
 }
 
 

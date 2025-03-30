@@ -35,4 +35,11 @@ interface GithubService {
         @Query("page") page: Int,
         @Query("per_page") perPage: Int = 20
     ): List<GithubUserDto>
+
+    @GET("users/{username}/following")
+    suspend fun getFollowing(
+        @Path("username") username: String,
+        @Query("page") page: Int,
+        @Query("per_page") perPage: Int = 20
+    ): List<GithubUserDto>
 }
