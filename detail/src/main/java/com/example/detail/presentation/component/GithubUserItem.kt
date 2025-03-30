@@ -35,7 +35,7 @@ fun GithubUserItem(username: String, avatarUrl: String) {
                 .clip(CircleShape)
         )
         Spacer(modifier = Modifier.width(8.dp))
-        Text(text = username.orEmpty(), fontWeight = FontWeight.Bold)
+        Text(text = username, fontWeight = FontWeight.Bold)
     }
 }
 
@@ -44,7 +44,6 @@ fun GithubUserItem(username: String, avatarUrl: String) {
 @Composable
 private fun GithubUserItemPrev() {
     HcsGithubUserTheme {
-        val dto = GithubUserDto(login = "wildanka", avatarUrl = "https://avatars.githubusercontent.com/u/69103?v=4")
         GithubUserItem(username = "wildanka", avatarUrl = "https://avatars.githubusercontent.com/u/69103?v=4")
     }
 }

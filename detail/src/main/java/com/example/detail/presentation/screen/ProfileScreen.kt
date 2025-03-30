@@ -2,10 +2,8 @@ package com.example.detail.presentation.screen
 
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Book
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.RemoveRedEye
-import androidx.compose.material.icons.outlined.Book
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.RemoveRedEye
 import androidx.compose.runtime.Composable

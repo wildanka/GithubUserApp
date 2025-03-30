@@ -1,14 +1,11 @@
 package com.example.detail.data
 
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.arch.base.data.ApiResponse
 import com.example.core.network.response.GithubUserDto
 import com.example.detail.data.local.DetailUserLocalDataSource
 import com.example.detail.data.mapper.GithubUserDetailDtoToEntMapper
 import com.example.detail.data.remote.DetailUserRemoteDataSource
-import com.example.detail.data.remote.FollowersPagingSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
 

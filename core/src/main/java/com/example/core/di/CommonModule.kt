@@ -2,7 +2,6 @@ package com.example.core.di
 
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.example.arch.base.data.AuthInterceptor
-import com.example.core.network.GithubService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient

@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(
     private val githubUserUseCase: GithubUserUseCase,
-    private val database: com.example.core.database.GithubUserDatabase,
+    private val database: GithubUserDatabase,
     private val context: Application
 ) : BaseViewModel() {
 
@@ -40,13 +40,7 @@ class HomeViewModel(
 
 
     override fun initialisation(savedInstanceState: Bundle?) {
-        //TODO : leave for initialisation scope
-        observeData()
         loadUserDataRemotely()
-    }
-
-    private fun observeData() {
-
     }
 
     fun refreshList() {
