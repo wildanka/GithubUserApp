@@ -1,4 +1,4 @@
-package com.example.hcsgithubuser.common.util
+package com.example.common.util
 
 object Const {
     const val paginationSize = 40

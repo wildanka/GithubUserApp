@@ -2,7 +2,7 @@ package com.example.hcsgithubuser.home.domain
 
 import com.example.arch.base.data.ApiResponse
 import com.example.hcsgithubuser.home.data.GithubUserRepository
-import com.example.hcsgithubuser.home.data.remote.response.GithubUserDto
+import com.example.common.data.remote.response.GithubUserDto
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

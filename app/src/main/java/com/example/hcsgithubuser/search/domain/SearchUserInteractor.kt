@@ -1,7 +1,7 @@
 package com.example.hcsgithubuser.search.domain
 
 import com.example.arch.base.data.ApiResponse
-import com.example.hcsgithubuser.home.data.remote.response.GithubUserResponse
+import com.example.common.data.remote.response.GithubUserResponse
 import com.example.hcsgithubuser.search.data.SearchUserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

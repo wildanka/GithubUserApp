@@ -1,10 +1,10 @@
 package com.example.hcsgithubuser.home.data
 
 import com.example.arch.base.data.ApiResponse
-import com.example.hcsgithubuser.common.data.remote.GithubService
+import com.example.common.data.remote.GithubService
 import com.example.hcsgithubuser.home.data.local.dao.GithubUserDao
 import com.example.hcsgithubuser.home.data.mapper.GithubUserDtoToEntMapper
-import com.example.hcsgithubuser.home.data.remote.response.GithubUserDto
+import com.example.common.data.remote.response.GithubUserDto
 
 class GithubUserRepositoryImpl(private val githubServiceApi: GithubService, private val githubUserDao: GithubUserDao) : GithubUserRepository {
 

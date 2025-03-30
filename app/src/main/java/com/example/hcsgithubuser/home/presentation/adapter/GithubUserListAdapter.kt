@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
-import com.example.hcsgithubuser.common.util.Const
+import com.example.common.util.Const
 import com.example.hcsgithubuser.databinding.ItemGithubUserBinding
 import com.example.hcsgithubuser.detail.presentation.DetailActivity
-import com.example.hcsgithubuser.home.data.remote.response.GithubUserDto
+import com.example.common.data.remote.response.GithubUserDto
 
 class GithubUserListAdapter() : RecyclerView.Adapter<GithubUserListAdapter.GithubUserViewHolder>() {
     private var list: MutableList<GithubUserDto> = mutableListOf()

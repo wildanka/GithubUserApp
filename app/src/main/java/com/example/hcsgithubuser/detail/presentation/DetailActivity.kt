@@ -9,8 +9,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.hcsgithubuser.common.presentation.ui.theme.HcsGithubUserTheme
-import com.example.hcsgithubuser.common.util.Const
+import com.example.common.presentation.ui.theme.HcsGithubUserTheme
+import com.example.common.util.Const
 import com.example.hcsgithubuser.detail.presentation.screen.ProfileScreen
 
 class DetailActivity : ComponentActivity() {

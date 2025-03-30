@@ -7,7 +7,7 @@ import com.example.arch.base.data.AuthInterceptor
 import com.example.hcsgithubuser.home.data.GithubUserRepository
 import com.example.hcsgithubuser.home.data.GithubUserRepositoryImpl
 import com.example.hcsgithubuser.home.data.local.GithubUserDatabase
-import com.example.hcsgithubuser.common.data.remote.GithubService
+import com.example.common.data.remote.GithubService
 import com.example.hcsgithubuser.home.domain.GithubUserInteractor
 import com.example.hcsgithubuser.home.domain.GithubUserUseCase
 import com.example.hcsgithubuser.home.presentation.HomeViewModel

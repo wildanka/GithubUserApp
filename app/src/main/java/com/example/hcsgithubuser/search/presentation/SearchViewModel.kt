@@ -8,7 +8,7 @@ import com.example.arch.base.data.ApiResponse
 import com.example.arch.base.data.UiState
 import com.example.hcsgithubuser.framework.AppUtility
 import com.example.hcsgithubuser.framework.Event
-import com.example.hcsgithubuser.home.data.remote.response.GithubUserDto
+import com.example.common.data.remote.response.GithubUserDto
 import com.example.hcsgithubuser.search.domain.SearchUserUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow

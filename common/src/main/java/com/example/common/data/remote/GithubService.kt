@@ -1,8 +1,8 @@
-package com.example.hcsgithubuser.common.data.remote
+package com.example.common.data.remote
 
-import com.example.hcsgithubuser.detail.data.remote.response.GithubUserDetailDto
-import com.example.hcsgithubuser.home.data.remote.response.GithubUserDto
-import com.example.hcsgithubuser.home.data.remote.response.GithubUserResponse
+import com.example.common.data.remote.response.GithubUserDto
+import com.example.common.data.remote.response.GithubUserResponse
+import com.example.common.data.remote.response.GithubUserDetailDto
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

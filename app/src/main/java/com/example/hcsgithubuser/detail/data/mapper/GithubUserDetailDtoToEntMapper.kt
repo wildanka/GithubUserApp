@@ -1,7 +1,6 @@
 package com.example.hcsgithubuser.detail.data.mapper
 
-import com.example.arch.base.data.mapper.ListMapper
-import com.example.hcsgithubuser.detail.data.remote.response.GithubUserDetailDto
+import com.example.common.data.remote.response.GithubUserDetailDto
 import com.example.hcsgithubuser.detail.data.local.entity.GithubUserDetailEntity
 
 object GithubUserDetailDtoToEntMapper :

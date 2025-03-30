@@ -2,7 +2,7 @@ package com.example.hcsgithubuser.home.data.mapper
 
 import com.example.arch.base.data.mapper.ListMapper
 import com.example.hcsgithubuser.home.data.local.entity.GithubUserEntity
-import com.example.hcsgithubuser.home.data.remote.response.GithubUserDto
+import com.example.common.data.remote.response.GithubUserDto
 
 object GithubUserDtoToEntMapper :
     com.example.arch.base.data.mapper.ListMapper<GithubUserDto, GithubUserEntity> {

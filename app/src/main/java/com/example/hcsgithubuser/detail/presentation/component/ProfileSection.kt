@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
-import com.example.hcsgithubuser.common.presentation.ui.theme.HcsGithubUserTheme
+import com.example.common.presentation.ui.theme.HcsGithubUserTheme
 
 @Composable
 fun ProfileSection(

@@ -1,4 +1,4 @@
-package com.example.hcsgithubuser.common.presentation.ui.theme
+package com.example.common.presentation.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

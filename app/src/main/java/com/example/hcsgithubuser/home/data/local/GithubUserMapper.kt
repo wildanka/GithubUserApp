@@ -1,7 +1,7 @@
 package com.example.hcsgithubuser.home.data.local
 
 import com.example.hcsgithubuser.home.data.local.entity.GithubUserEntity
-import com.example.hcsgithubuser.home.data.remote.response.GithubUserDto
+import com.example.common.data.remote.response.GithubUserDto
 
 fun GithubUserDto.toEntity(): GithubUserEntity {
     return GithubUserEntity(

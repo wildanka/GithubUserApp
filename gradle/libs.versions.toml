@@ -26,9 +26,9 @@ swiperefreshlayout = "1.1.0"
 pagingRuntimeKtx = "3.3.6"
 #compose
 activityCompose = "1.10.1"
-composeBom = "2024.04.01"
+composeBom = "2025.03.01"
 coilCompose = "3.1.0"
-
+compose-compiler = "1.5.15"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -68,6 +68,7 @@ androidx-paging-runtime-ktx = { group = "androidx.paging", name = "paging-runtim
 #Android-compose-lib
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+androidx-compose-compiler = { group = "androidx.compose.compiler", name="compiler", version.ref = "compose-compiler" }
 androidx-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }

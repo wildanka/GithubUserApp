@@ -1,4 +1,4 @@
-package com.example.hcsgithubuser.home.data.remote.response
+package com.example.common.data.remote.response
 
 import com.squareup.moshi.Json
 
