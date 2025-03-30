@@ -6,7 +6,7 @@ import com.example.arch.base.presentation.BaseActivity
 import com.example.hcsgithubuser.databinding.ActivityMainBinding
 import com.example.hcsgithubuser.home.presentation.HomeFragment
 
-class MainActivity : com.example.arch.base.presentation.BaseActivity<ActivityMainBinding>() {
+class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun setupViews(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()

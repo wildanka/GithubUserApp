@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.example.core.common.presentation.util.Const
 import com.example.hcsgithubuser.databinding.ItemGithubUserBinding
-import com.example.hcsgithubuser.detail.presentation.DetailActivity
 import com.example.core.network.response.GithubUserDto
+import com.example.detail.presentation.DetailActivity
 
 class GithubUserListAdapter() : RecyclerView.Adapter<GithubUserListAdapter.GithubUserViewHolder>() {
     private var list: MutableList<GithubUserDto> = mutableListOf()
@@ -44,6 +44,7 @@ class GithubUserListAdapter() : RecyclerView.Adapter<GithubUserListAdapter.Githu
         holder.bind(list[position])
     }
 
+
     inner class GithubUserViewHolder(private val binding: ItemGithubUserBinding) :
         ViewHolder(binding.root) {
         fun bind(githubUser: GithubUserDto) {
@@ -54,7 +55,7 @@ class GithubUserListAdapter() : RecyclerView.Adapter<GithubUserListAdapter.Githu
                 .into(binding.imageView)
             binding.tvUsername.text = githubUser.login
             binding.root.setOnClickListener {
-                val intent = Intent(binding.root.context, DetailActivity::class.java)
+                val intent = Intent(binding.root.context, Class.forName("com.example.detail.presentation.DetailActivity"))
                 intent.putExtra(Const.USERNAME_EXTRA, githubUser.login.orEmpty())
                 intent.putExtra(Const.USER_ID_EXTRA, githubUser.id ?: 1)
                 binding.root.context.startActivity(intent)
