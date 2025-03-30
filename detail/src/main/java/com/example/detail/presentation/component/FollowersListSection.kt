@@ -1,5 +1,6 @@
 package com.example.detail.presentation.component
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -21,7 +22,7 @@ fun FollowersList(followers: LazyPagingItems<GithubUserDto>, modifier: Modifier 
     if (followers.itemCount == 0) {
         Text("No followers found!", Modifier.padding(16.dp))
     }
-    LazyColumn(modifier = Modifier.fillMaxSize()) {
+    LazyColumn(modifier = Modifier.fillMaxSize(), contentPadding = PaddingValues(bottom = 80.dp)) {
         items(followers.itemCount) { index ->
             val follower = updatedFollowers.value[index]
             if (follower != null) {
