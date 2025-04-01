@@ -92,8 +92,10 @@ dependencies {
     testImplementation(libs.mockk.android)
     testImplementation(libs.mockk.agent)
     testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockito.core)
     testImplementation(libs.mockito.kotlin)
     testImplementation(libs.androidx.core.testing)
+
     //paging testing
     testImplementation(libs.androidx.paging.testing)
     implementation(libs.kotlin.stdlib) // Make sure to use the correct Kotlin version
