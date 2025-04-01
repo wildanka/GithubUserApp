@@ -11,9 +11,9 @@ This is just a simple app that trying to display Github users public data,  app 
 
 
 ### Features: 
-1. **Search User Screen** (View Based)
+1. **Search User Screen** (View Based) + Offline support 
 2. **User List Screen** (View Based)
-3. **User Detail Screen** (Compose Based)
+3. **User Detail Screen** (Compose Based) + Offline support
 4. Local data persistence using room to support offline usage in the **User List Screen**
 5. Local caching support for the profile data in **User Detail Screen** (excluding the followers and following list)
 #### Improvements: 
@@ -25,9 +25,9 @@ This is just a simple app that trying to display Github users public data,  app 
 ### Architecture:
 Clean Architecture, with MVVM design pattern and Modularization.
 #### why it was chosen?
-Clean Architecture -> helping us separate the concern between code which will make the code to be easily testable.
-Modularization -> because it was instructed(hehe). But yeah we're all know that there is so many advantages of having a modularized code, starting from helping a team at grows, forcing the code concerns to be cleaner (whether by layer or feature), and many more.
-MVVM -> as we are still using View-Based UI(because we need to use Glide in the list screen) which will really work well with MVVM approach. But yeah, MVVM with ViewModels, of course ViewModel help us reduce effort to handle configuration changes and unexpected data loss during configuration changes.
+- **Clean Architecture** -> helping us separate the concern between code which will make the code to be easily testable.
+- **Modularization** -> because it was instructed(hehe). But yeah we're all know that there is so many advantages of having a modularized code, starting from helping a team at grows, forcing the code concerns to be cleaner (whether by layer or feature), and many more.
+- **MVVM** -> as we are still using View-Based UI(because we need to use Glide in the list screen) which will really work well with MVVM approach. But yeah, MVVM with ViewModels, of course ViewModel help us reduce effort to handle configuration changes and unexpected data loss during configuration changes.
 
 ## Tools Used:
 #### Open Source Library
